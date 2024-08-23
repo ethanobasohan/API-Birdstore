@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Bird Prices</title>
+    <script>
+        async function loadPrices() {
+            const response = await fetch('/api/birds/');
+            const birds = await response.json();
+
+
+            const priceList = document.getElementById('priceList');
+            priceList.innerHTML = '';
+
+
+            birds.forEach(bird => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${bird.name}: $${bird.price}`;
+                priceList.appendChild(listItem);
+            });
+        }
+
+
+        document.addEventListener('DOMContentLoaded', loadPrices);
+    </script>
+</head>
+<body>
+    <h1>Bird Prices</h1>
+    <ul id="priceList"></ul>
+</body>
+</html>
